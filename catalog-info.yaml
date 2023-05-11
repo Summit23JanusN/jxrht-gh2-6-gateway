@@ -1,0 +1,68 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: jxrht-gh2-6-poi-gateway-app-dev
+  annotations:
+    argocd/app-name: jxrht-gh2-6-poi-gateway-app-dev
+    backstage.io/kubernetes-id: jxrht-gh2-6-poi-gateway-app-dev
+    backstage.io/kubernetes-namespace: jxrht-gh2-6
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/instance=jxrht-gh2-6-poi-gateway-app-dev'
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: Summit23JanusN/jxrht-gh2-6-gateway
+  tags:
+    - java
+    - quarkus
+    - maven
+    - workshop
+  links:
+    - url: https://console-openshift-console.apps.summit23bis.17gd.p1.openshiftapps.com/dev-pipelines/ns/jxrht-gh2-6/
+      title: Pipelines
+      icon: web
+    - url: https://console-openshift-console.apps.summit23bis.17gd.p1.openshiftapps.com/k8s/ns/jxrht-gh2-6/deployments/poi-gateway-app
+      title: Deployment
+      icon: web
+    - url: https://devspaces.apps.summit23bis.17gd.p1.openshiftapps.com/#https://github.com/Summit23JanusN/jxrht-gh2-6-gateway?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: "user:jxrht-gh2"
+  system: workshop-system-jxrht-gh2-6
+  providesApis:
+    - gateway-api-jxrht-gh2-6
+  consumesApis:
+    - backend-api-jxrht-gh2-6
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: workshop-system-jxrht-gh2-6
+  tags:
+    - backstage
+    - janus-idp
+    - openshift
+    - workshop
+    - rh-summit
+spec:
+  owner: "user:jxrht-gh2"
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: gateway-api-jxrht-gh2-6
+  description: API surface exposed to interact with Backends (summit POIs + parks data) via the Gateway
+  links:
+    - url: http://poi-gateway-app-jxrht-gh2-6.apps.summit23bis.17gd.p1.openshiftapps.com/q/swagger-ui
+      title: Swagger UI
+      icon: web
+    - url: https://github.com/Summit23JanusN/jxrht-gh2-6-gateway/tree/main/src/main/resources/META-INF/openapi.yaml
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: production
+  owner: "user:jxrht-gh2"
+  system: workshop-system-jxrht-gh2-6
+  definition:
+    $text: https://github.com/Summit23JanusN/jxrht-gh2-6-gateway/tree/main/src/main/resources/META-INF/openapi.yaml
