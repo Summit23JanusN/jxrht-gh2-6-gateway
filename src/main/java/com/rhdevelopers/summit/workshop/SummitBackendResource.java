@@ -68,7 +68,7 @@ public class SummitBackendResource {
         ).build();
     }
 
-    //Uncomment the Java method below to add an API endpoint to add your own data points.
+//New endpoint
     
     @POST
     @Path("poi/add/point")
